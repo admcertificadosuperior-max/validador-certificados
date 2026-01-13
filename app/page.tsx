@@ -41,16 +41,16 @@ export default function Home() {
           style={{ height: 56, marginBottom: 24 }}
         />
 
-        <h2 style={{ marginBottom: 8 }}>Validação de Certificado</h2>
+        <h2 style={{ marginBottom: 8 }}>Validação de Diploma</h2>
         <p style={{ fontSize: 14, color: "#6b7280", marginBottom: 24 }}>
-          Informe o código do certificado
+          Informe o código do diploma
         </p>
 
         <form onSubmit={consultar}>
           <input
             value={codigo}
             onChange={(e) => setCodigo(e.target.value)}
-            placeholder="Ex: 298.298.b6037ffc165c"
+            placeholder="Ex: 000.000.x0000xxx000x"
             style={{
               width: "100%",
               padding: 12,
@@ -73,7 +73,7 @@ export default function Home() {
               cursor: "pointer",
             }}
           >
-            Consultar certificado
+            Consultar diploma
           </button>
         </form>
       </div>
