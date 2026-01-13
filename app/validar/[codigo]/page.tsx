@@ -15,6 +15,37 @@ function formatarData(data: string) {
   return new Date(data).toLocaleDateString("pt-BR");
 }
 
+/* ====== ESTILOS ====== */
+const tituloSecao = {
+  fontSize: 18,
+  fontWeight: 600,
+  color: "#111827",
+  marginTop: 36,
+  marginBottom: 20,
+};
+
+const subtitulo = {
+  fontSize: 14,
+  fontWeight: 600,
+  color: "#374151",
+  marginTop: 24,
+  marginBottom: 12,
+};
+
+const campo = {
+  marginBottom: 14,
+};
+
+const label = {
+  fontSize: 12,
+  color: "#6b7280",
+};
+
+const valor = {
+  fontSize: 14,
+  color: "#111827",
+};
+
 export default async function Validar({
   params,
 }: {
@@ -29,86 +60,131 @@ export default async function Validar({
   const valido = !!data;
 
   return (
-    <div style={{ background: "#f2f2f2", minHeight: "100vh", padding: 24 }}>
+    <div
+      style={{
+        fontFamily: "Inter, Roboto, Helvetica, Arial, sans-serif",
+        backgroundColor: "#f4f6f8",
+        minHeight: "100vh",
+        padding: "32px 16px",
+      }}
+    >
       <div
         style={{
-          maxWidth: 960,
+          maxWidth: 980,
           margin: "0 auto",
-          background: "#fff",
-          padding: 32,
-          borderRadius: 6,
-          boxShadow: "0 1px 6px rgba(0,0,0,.1)",
+          backgroundColor: "#ffffff",
+          padding: 40,
+          borderRadius: 4,
+          boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
         }}
       >
         {/* CABEÇALHO */}
-        <div style={{ textAlign: "center", marginBottom: 24 }}>
-          <img src="/logo.png" height={64} />
-          <h2 style={{ marginTop: 12 }}>Validação de Diploma</h2>
+        <div style={{ textAlign: "center", marginBottom: 32 }}>
+          <img
+            src="https://portalinstitucional-assets.azureedge.net/strapi/assets/unopar_8f493bde5b_1_98d0368b58.png"
+            alt="Instituição de Ensino"
+            style={{ height: 64, marginBottom: 12 }}
+          />
+          <h2
+            style={{
+              fontSize: 22,
+              fontWeight: 600,
+              color: "#1f2937",
+              margin: 0,
+            }}
+          >
+            Validação de Diploma
+          </h2>
         </div>
 
         {/* STATUS */}
         <div
           style={{
-            background: valido ? "#e6f4ea" : "#fdecea",
+            backgroundColor: valido ? "#e6f4ea" : "#fdecea",
             borderLeft: `6px solid ${valido ? "#2e7d32" : "#c62828"}`,
             padding: 16,
             marginBottom: 32,
             fontWeight: 600,
+            color: "#1f2937",
           }}
         >
           {valido ? "Diploma válido" : "Diploma inválido"}
         </div>
 
         {!valido && (
-          <p>Este diploma não consta na base de dados da instituição.</p>
+          <p style={{ color: "#374151" }}>
+            Este diploma não consta na base de dados da instituição.
+          </p>
         )}
 
         {valido && (
           <>
-            <h3>Dados públicos do diploma</h3>
+            {/* BOTÃO PDF */}
+            {data.pdf_url && (
+              <div style={{ marginBottom: 32 }}>
+                <a
+                  href={data.pdf_url}
+                  target="_blank"
+                  style={{
+                    display: "inline-block",
+                    backgroundColor: "#2563eb",
+                    color: "#ffffff",
+                    padding: "10px 20px",
+                    borderRadius: 4,
+                    textDecoration: "none",
+                    fontSize: 14,
+                    fontWeight: 500,
+                  }}
+                >
+                  Baixar diploma em PDF
+                </a>
+              </div>
+            )}
 
-            <h4>Diplomado</h4>
-            <p><strong>Nome</strong><br />{data.nome}</p>
-            <p><strong>Nacionalidade</strong><br />{data.nacionalidade}</p>
-            <p><strong>Naturalidade</strong><br />{data.naturalidade}</p>
-            <p><strong>CPF</strong><br />{mascararCPF(data.cpf)}</p>
-            <p><strong>Data de Nascimento</strong><br />{formatarData(data.data_nascimento)}</p>
-            <p><strong>Data de Ingresso</strong><br />{formatarData(data.data_ingresso)}</p>
+            <div style={tituloSecao}>Dados públicos do diploma</div>
 
-            <h4>Diploma</h4>
-            <p><strong>Data de Expedição</strong><br />{formatarData(data.data_expedicao)}</p>
-            <p><strong>Número de Registro</strong><br />{data.numero_registro}</p>
-            <p><strong>Data de Registro</strong><br />{formatarData(data.data_registro)}</p>
+            <div style={subtitulo}>Diplomado</div>
+            <div style={campo}><div style={label}>Nome</div><div style={valor}>{data.nome}</div></div>
+            <div style={campo}><div style={label}>Nacionalidade</div><div style={valor}>{data.nacionalidade}</div></div>
+            <div style={campo}><div style={label}>Naturalidade</div><div style={valor}>{data.naturalidade}</div></div>
+            <div style={campo}><div style={label}>CPF</div><div style={valor}>{mascararCPF(data.cpf)}</div></div>
+            <div style={campo}><div style={label}>Data de Nascimento</div><div style={valor}>{formatarData(data.data_nascimento)}</div></div>
+            <div style={campo}><div style={label}>Data de Ingresso</div><div style={valor}>{formatarData(data.data_ingresso)}</div></div>
 
-            <h4>Dados do Curso</h4>
-            <p><strong>Nome do Curso</strong><br />{data.nome_curso}</p>
-            <p><strong>Código do Curso e-MEC</strong><br />{data.codigo_emec_curso}</p>
-            <p><strong>Nome da Habilitação</strong><br />{data.nome_habilitacao}</p>
-            <p><strong>Título Conferido</strong><br />{data.titulo_conferido}</p>
-            <p><strong>Grau Conferido</strong><br />{data.grau_conferido}</p>
-            <p><strong>Endereço do Curso</strong><br />{data.endereco_curso}</p>
-            <p><strong>Polo</strong><br />{data.polo}</p>
-            <p><strong>Autorização</strong><br />{data.autorizacao}</p>
-            <p><strong>Reconhecimento</strong><br />{data.reconhecimento}</p>
-            <p><strong>Renovação de Reconhecimento</strong><br />{data.renovacao_reconhecimento}</p>
+            <div style={subtitulo}>Diploma</div>
+            <div style={campo}><div style={label}>Data de Expedição</div><div style={valor}>{formatarData(data.data_expedicao)}</div></div>
+            <div style={campo}><div style={label}>Número de Registro</div><div style={valor}>{data.numero_registro}</div></div>
+            <div style={campo}><div style={label}>Data de Registro</div><div style={valor}>{formatarData(data.data_registro)}</div></div>
 
-            <h4>Instituição de Ensino Emissora</h4>
-            <p><strong>Nome</strong><br />{data.instituicao_nome}</p>
-            <p><strong>Código e-MEC</strong><br />{data.instituicao_codigo_emec}</p>
-            <p><strong>CNPJ</strong><br />{data.instituicao_cnpj}</p>
-            <p><strong>Endereço</strong><br />{data.instituicao_endereco}</p>
-            <p><strong>Credenciamento</strong><br />{data.instituicao_credenciamento}</p>
-            <p><strong>Recredenciamento</strong><br />{data.instituicao_recredenciamento}</p>
-            <p><strong>Mantenedora</strong><br />{data.instituicao_mantenedora}</p>
+            <div style={subtitulo}>Dados do Curso</div>
+            <div style={campo}><div style={label}>Nome do Curso</div><div style={valor}>{data.nome_curso}</div></div>
+            <div style={campo}><div style={label}>Código do Curso e-MEC</div><div style={valor}>{data.codigo_emec_curso}</div></div>
+            <div style={campo}><div style={label}>Nome da Habilitação</div><div style={valor}>{data.nome_habilitacao}</div></div>
+            <div style={campo}><div style={label}>Título Conferido</div><div style={valor}>{data.titulo_conferido}</div></div>
+            <div style={campo}><div style={label}>Grau Conferido</div><div style={valor}>{data.grau_conferido}</div></div>
+            <div style={campo}><div style={label}>Endereço do Curso</div><div style={valor}>{data.endereco_curso}</div></div>
+            <div style={campo}><div style={label}>Polo</div><div style={valor}>{data.polo}</div></div>
+            <div style={campo}><div style={label}>Autorização</div><div style={valor}>{data.autorizacao}</div></div>
+            <div style={campo}><div style={label}>Reconhecimento</div><div style={valor}>{data.reconhecimento}</div></div>
+            <div style={campo}><div style={label}>Renovação de Reconhecimento</div><div style={valor}>{data.renovacao_reconhecimento}</div></div>
 
-            <h4>Instituição de Ensino Registradora</h4>
-            <p><strong>Nome</strong><br />{data.registradora_nome}</p>
-            <p><strong>Código e-MEC</strong><br />{data.registradora_codigo_emec}</p>
-            <p><strong>CNPJ</strong><br />{data.registradora_cnpj}</p>
-            <p><strong>Endereço</strong><br />{data.registradora_endereco}</p>
-            <p><strong>Credenciamento</strong><br />{data.registradora_credenciamento}</p>
-            <p><strong>Recredenciamento</strong><br />{data.registradora_recredenciamento}</p>
-            <p><strong>Mantenedora</strong><br />{data.registradora_mantenedora}</p>
+            <div style={subtitulo}>Instituição de Ensino Emissora</div>
+            <div style={campo}><div style={label}>Nome</div><div style={valor}>{data.instituicao_nome}</div></div>
+            <div style={campo}><div style={label}>Código e-MEC</div><div style={valor}>{data.instituicao_codigo_emec}</div></div>
+            <div style={campo}><div style={label}>CNPJ</div><div style={valor}>{data.instituicao_cnpj}</div></div>
+            <div style={campo}><div style={label}>Endereço</div><div style={valor}>{data.instituicao_endereco}</div></div>
+            <div style={campo}><div style={label}>Credenciamento</div><div style={valor}>{data.instituicao_credenciamento}</div></div>
+            <div style={campo}><div style={label}>Recredenciamento</div><div style={valor}>{data.instituicao_recredenciamento}</div></div>
+            <div style={campo}><div style={label}>Mantenedora</div><div style={valor}>{data.instituicao_mantenedora}</div></div>
+
+            <div style={subtitulo}>Instituição de Ensino Registradora</div>
+            <div style={campo}><div style={label}>Nome</div><div style={valor}>{data.registradora_nome}</div></div>
+            <div style={campo}><div style={label}>Código e-MEC</div><div style={valor}>{data.registradora_codigo_emec}</div></div>
+            <div style={campo}><div style={label}>CNPJ</div><div style={valor}>{data.registradora_cnpj}</div></div>
+            <div style={campo}><div style={label}>Endereço</div><div style={valor}>{data.registradora_endereco}</div></div>
+            <div style={campo}><div style={label}>Credenciamento</div><div style={valor}>{data.registradora_credenciamento}</div></div>
+            <div style={campo}><div style={label}>Recredenciamento</div><div style={valor}>{data.registradora_recredenciamento}</div></div>
+            <div style={campo}><div style={label}>Mantenedora</div><div style={valor}>{data.registradora_mantenedora}</div></div>
           </>
         )}
       </div>
