@@ -9,8 +9,14 @@ export default function Home() {
 
   function consultar(e: React.FormEvent) {
     e.preventDefault();
-    if (!codigo.trim()) return;
-    router.push(`/validar/${codigo.trim()}`);
+
+    const codigoLimpo = codigo.trim();
+    if (!codigoLimpo) return;
+
+    // ✅ Marca navegação válida para evitar redirect em loop
+    sessionStorage.setItem("validacao_navegacao", "true");
+
+    router.push(`/validar/${codigoLimpo}`);
   }
 
   return (
@@ -42,6 +48,7 @@ export default function Home() {
         />
 
         <h2 style={{ marginBottom: 8 }}>Validação de Diploma</h2>
+
         <p style={{ fontSize: 14, color: "#6b7280", marginBottom: 24 }}>
           Informe o código do diploma
         </p>
