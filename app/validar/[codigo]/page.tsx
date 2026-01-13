@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import Link from "next/link";
 import { createClient } from "@supabase/supabase-js";
 
 const supabase = createClient(
@@ -90,11 +91,14 @@ export default async function Validar({
       >
         {/* CABEÇALHO */}
         <div style={{ textAlign: "center", marginBottom: 32 }}>
-          <img
-            src="https://portalinstitucional-assets.azureedge.net/strapi/assets/unopar_8f493bde5b_1_98d0368b58.png"
-            alt="Instituição de Ensino"
-            style={{ height: 64, marginBottom: 12 }}
-          />
+          <Link href="/" style={{ display: "inline-block" }}>
+            <img
+              src="https://portalinstitucional-assets.azureedge.net/strapi/assets/unopar_8f493bde5b_1_98d0368b58.png"
+              alt="Instituição de Ensino"
+              style={{ height: 64, marginBottom: 12, cursor: "pointer" }}
+            />
+          </Link>
+
           <h2
             style={{
               fontSize: 22,
