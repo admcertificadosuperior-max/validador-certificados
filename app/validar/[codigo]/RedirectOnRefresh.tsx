@@ -7,10 +7,12 @@ export default function RedirectOnRefresh() {
   const router = useRouter();
 
   useEffect(() => {
-    const navEntries = performance.getEntriesByType("navigation") as PerformanceNavigationTiming[];
+    const navegacaoValida = sessionStorage.getItem("validacao_navegacao");
 
-    if (navEntries.length > 0 && navEntries[0].type === "reload") {
+    if (!navegacaoValida) {
       router.replace("/");
+    } else {
+      sessionStorage.removeItem("validacao_navegacao");
     }
   }, [router]);
 
