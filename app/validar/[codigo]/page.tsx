@@ -108,23 +108,27 @@ export default async function Validar({
         {valido && (
           <>
             {/* PDF */}
-            {data.pdf_url && (
-              <div style={{ marginBottom: 32 }}>
-                <a
-                  href={data.pdf_url}
-                  target="_blank"
-                  style={{
-                    background: "#2563eb",
-                    color: "#fff",
-                    padding: "10px 20px",
-                    borderRadius: 4,
-                    textDecoration: "none",
-                  }}
-                >
-                  Baixar diploma em PDF
-                </a>
-              </div>
-            )}
+           {data.pdf_url && (
+  <div style={{ marginBottom: 32 }}>
+    <a
+      href={data.pdf_url}
+      target="_blank"
+      style={{
+        display: "inline-block",
+        backgroundColor: "#2563eb",
+        color: "#ffffff",
+        padding: "10px 20px",
+        borderRadius: 4,
+        textDecoration: "none",
+        fontSize: 14,
+        fontWeight: 500,
+      }}
+    >
+      Baixar diploma em PDF
+    </a>
+  </div>
+)}
+
 
             {/* DIPLOMADO */}
             <div style={card}>
