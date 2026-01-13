@@ -7,7 +7,15 @@ const supabase = createClient(
 
 function mascararCPF(cpf: string) {
   if (!cpf) return "";
-  return cpf.replace(/^(\d{3})\d{3}(\d{3})\d{2}$/, "***.$2.$3-**");
+
+  const somenteNumeros = cpf.replace(/\D/g, "");
+
+  if (somenteNumeros.length !== 11) return cpf;
+
+  return `***.${somenteNumeros.slice(3, 6)}.${somenteNumeros.slice(
+    6,
+    9
+  )}-**`;
 }
 
 function formatarData(data: string) {
