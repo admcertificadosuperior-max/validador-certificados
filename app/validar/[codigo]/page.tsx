@@ -109,25 +109,53 @@ export default async function Validar({
           <>
             {/* PDF */}
            {data.pdf_url && (
-  <div style={{ marginBottom: 32 }}>
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "flex-end",
+      marginBottom: 24,
+    }}
+  >
     <a
       href={data.pdf_url}
       target="_blank"
       style={{
-        display: "inline-block",
-        backgroundColor: "#2563eb",
-        color: "#ffffff",
-        padding: "10px 20px",
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 6,
+        padding: "4px 10px",
+        height: 28,
+        border: "1px solid #d1d5db",
         borderRadius: 4,
-        textDecoration: "none",
-        fontSize: 14,
+        backgroundColor: "transparent",
+        color: "#374151",
+        fontSize: 12,
         fontWeight: 500,
+        textDecoration: "none",
       }}
     >
-      Baixar diploma em PDF
+      {/* Ícone download */}
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="13"
+        height="13"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <polyline points="7 10 12 15 17 10" />
+        <line x1="12" y1="15" x2="12" y2="3" />
+      </svg>
+
+      PDF
     </a>
   </div>
 )}
+
 
 
             {/* DIPLOMADO */}
