@@ -2,6 +2,7 @@ export const dynamic = "force-dynamic";
 
 import Link from "next/link";
 import { createClient } from "@supabase/supabase-js";
+import RedirectOnRefresh from "./RedirectOnRefresh";
 
 const supabase = createClient(
   process.env.SUPABASE_URL!,
@@ -41,7 +42,6 @@ const grid = {
   gap: 16,
 };
 
-const campo = {};
 const label = { fontSize: 12, color: "#6b7280", marginBottom: 2 };
 const valor = { fontSize: 14, color: "#111827" };
 
@@ -67,6 +67,9 @@ export default async function Validar({
         padding: "32px 16px",
       }}
     >
+      {/* 🔁 REDIRECIONA SE FOR REFRESH */}
+      <RedirectOnRefresh />
+
       <div
         style={{
           maxWidth: 1000,
@@ -107,56 +110,52 @@ export default async function Validar({
 
         {valido && (
           <>
-            {/* PDF */}
-           {data.pdf_url && (
-  <div
-    style={{
-      display: "flex",
-      justifyContent: "flex-end",
-      marginBottom: 24,
-    }}
-  >
-    <a
-      href={data.pdf_url}
-      target="_blank"
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        gap: 6,
-        padding: "4px 10px",
-        height: 28,
-        border: "1px solid #d1d5db",
-        borderRadius: 4,
-        backgroundColor: "transparent",
-        color: "#374151",
-        fontSize: 12,
-        fontWeight: 500,
-        textDecoration: "none",
-      }}
-    >
-      {/* Ícone download */}
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="13"
-        height="13"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-        <polyline points="7 10 12 15 17 10" />
-        <line x1="12" y1="15" x2="12" y2="3" />
-      </svg>
-
-      Baixar diploma
-    </a>
-  </div>
-)}
-
-
+            {/* BOTÃO PDF */}
+            {data.pdf_url && (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  marginBottom: 24,
+                }}
+              >
+                <a
+                  href={data.pdf_url}
+                  target="_blank"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 6,
+                    padding: "4px 10px",
+                    height: 28,
+                    border: "1px solid #d1d5db",
+                    borderRadius: 4,
+                    backgroundColor: "transparent",
+                    color: "#374151",
+                    fontSize: 12,
+                    fontWeight: 500,
+                    textDecoration: "none",
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="13"
+                    height="13"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                  Baixar diploma
+                </a>
+              </div>
+            )}
 
             {/* DIPLOMADO */}
             <div style={card}>
